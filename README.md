@@ -25,6 +25,10 @@
 사용자의 선호도와 음식점의 특성을 내재된 임베딩 벡터(embedding vector) 로 학습하고, 이들을 결합하여 상호작용 표현(interaction representation)을 생성합니다.
 - **리뷰 측면 감성 추출 모듈**
 
+DeBERTa(Decoding-enhanced BERT with disentangled attention)를 활용하여
+음식(Food) | 서비스(Service) | 가격(Price) | 분위기(Ambience) | 위치(Location)
+5가지 측면에 대해 ABSA 수행합니다. 각 측면의 [긍정, 부정, 중립] 감성 점수를 추출합니다.
+
 리뷰에서 추출된 감성 벡터(sentiment_vector)를 입력으로 받아, 각 리뷰가 포함한 맛, 서비스, 가격, 분위기, 위치 등의 세부 속성(aspects)에 대한 감정적 특성을 학습합니다.
 - **평점 예측 모듈**
 
@@ -42,7 +46,7 @@
 | UCAM   | 0.5937 | 0.7705 | 0.5962 | 21.58%  |
 | **OURS** | **0.4697** | **0.6854** | **0.5390** | **18.79%** |
 
-![alt text](image-4.png)
+![alt text](image-2.png)
 
 ## 팀원 및 역할 (Team Members & Roles)
 
