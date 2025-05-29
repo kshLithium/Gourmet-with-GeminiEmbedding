@@ -9,6 +9,7 @@
 
 ##  데이터(Data)
 ![alt text](image.png)
+
 본 프로젝트에서는 Yelp Open Dataset을 기반으로 사용자 맞춤형 맛집 추천 시스템을 구축하였습니다.
 
 ## 데이터 전처리(Data Preprocessing)
