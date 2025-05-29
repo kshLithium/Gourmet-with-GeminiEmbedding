@@ -61,6 +61,11 @@ DeBERTa(Decoding-enhanced BERT with disentangled attention)를 활용하여
 
 ![alt text](image-2.png)
 
+## 시연 및 결과물 링크 (Demonstration & Deliverables)
+- [시연 영상 (Demo Clip)](https://www.youtube.com/watch?v=k6dM_pyctHE)  
+- [시연 영상 - 전체 버전 (Full Demo)](https://youtu.be/f6Klq3RecqE?si=fKODbVXt5TZdwKnv)  
+- [Tableau 데이터 시각화 (Data Visualization)](https://public.tableau.com/app/profile/mingyu.jeong5084/viz/Gourmet/79_Gourmet?publish=yes)
+
 ## 참고 문헌 (References)
 
 이청용, 최사박, 신병규, 김재경. 「[온라인 호텔 리뷰와 평점 불일치 문제 해결을 위한 딥러닝 기반 개인화 추천 서비스 연구](https://www.koreascience.kr/article/JAKO202113157683309.page)」. 2021. 
