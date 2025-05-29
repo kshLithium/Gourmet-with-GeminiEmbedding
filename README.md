@@ -7,6 +7,10 @@
 
 본 프로젝트는 이러한 문제를 해결하여 기존 맛집 추천 시스템의 한계를 극복하여, 사용자에게 만족도 높은 추천 경험을 제공합니다.
 
+## 패키지(Packages)
+
+
+
 ##  데이터(Data)
 ![alt text](image.png)
 
@@ -48,13 +52,6 @@ DeBERTa(Decoding-enhanced BERT with disentangled attention)를 활용하여
 | **OURS** | **0.4697** | **0.6854** | **0.5390** | **18.79%** |
 
 ![alt text](image-2.png)
-
-## 참고 문헌 (References)
-
-이청용, 최사박, 신병규, 김재경. 「[온라인 호텔 리뷰와 평점 불일치 문제 해결을 위한 딥러닝 기반 개인화 추천 서비스 연구](https://www.koreascience.kr/article/JAKO202113157683309.page)」. 2021. 
-
-우수현, 박선우, 김려, 이흠철, 이청용, 김재경. 「[고객의 속성별 중요도를 반영한 속성 기반 감성 분석(ABSA)을 이용한 레스토랑 추천 시스템](https://doi.org/10.13088/jiis.2025.31.1.045)」. 2025.
-
 
 ## 팀원 및 역할 (Team Members & Roles)
 
