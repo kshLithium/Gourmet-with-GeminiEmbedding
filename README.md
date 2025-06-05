@@ -22,7 +22,7 @@
 ##  데이터(Data)
 ![alt text](image.png)
 
-본 프로젝트에서는 Yelp Open Dataset을 기반으로 사용자 맞춤형 맛집 추천 시스템을 구축하였습니다.
+본 프로젝트에서는 Yelp Open Dataset을 기반으로 사용자 맞춤형 맛집 추천 시스템을 구축하였습니다.([Yelp Open Dataset](https://business.yelp.com/data/resources/open-dataset/))
 
 ## 데이터 전처리(Data Preprocessing)
 - **지역 데이터 집중** : 미국 내 음식점 수가 가장 많은 주 펜실베니아(PA)의 필라델피아 시로 데이터 범위 한정
@@ -81,3 +81,5 @@ DeBERTa(Decoding-enhanced BERT with disentangled attention)를 활용하여
 | 정민규   | 시각화 (Visualization)       |
 | 강범준   | 발표, 포스터, 문서 정리 (Presentation & Docs) |
 | 김성훈   | 발표, 포스터, 문서 정리 (Presentation & Docs) |
+
+## 상장
