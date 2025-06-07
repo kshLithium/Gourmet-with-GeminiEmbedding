@@ -20,7 +20,7 @@
 - **Scikit-learn**: 1.5.1
 
 ##  데이터(Data)
-![alt text](image.png)
+![alt text](Image/image.png)
 
 본 프로젝트에서는 Yelp Open Dataset을 기반으로 사용자 맞춤형 맛집 추천 시스템을 구축하였습니다.([Yelp Open Dataset](https://business.yelp.com/data/resources/open-dataset/))
 
@@ -31,7 +31,7 @@
 
 
 ## 모델링(Modeling)
-![alt text](image-1.png)
+![alt text](Image/image-1.png)
 
 - **유저-식당 상호작용 모듈**
 
@@ -59,7 +59,7 @@ DeBERTa(Decoding-enhanced BERT with disentangled attention)를 활용하여
 | UCAM   | 0.5937 | 0.7705 | 0.5962 | 21.58%  |
 | **AS-Rec** | **0.4697** | **0.6854** | **0.5390** | **18.79%** |
 
-![alt text](image-2.png)
+![alt text](Image/image-2.png)
 
 ## 시연 및 결과물 링크 (Demonstration & Deliverables)
 - [시연 영상 (Demo Clip)](https://www.youtube.com/watch?v=k6dM_pyctHE)  
