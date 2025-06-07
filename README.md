@@ -1,4 +1,4 @@
-![alt text](image-3.png)
+![alt text](Image/image-3.png)
 # 사용자 평점과 리뷰 텍스트를 고려한 딥러닝 기반 맛집 추천 시스템
 
 ##  개요 (Overview)
