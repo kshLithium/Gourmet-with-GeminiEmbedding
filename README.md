@@ -10,16 +10,16 @@
 ## 디렉토리 구조(Directory Structure)
 
 ```
-├── Comparison_models/        # 비교 모델
-│   └── AFRAM.ipynb       # 고객 및 레스토랑의 지역적, 전역적 특성을 기반으로 선호도를 예측하는 AFRAM모델
-│   └── IBCF_UBCF_SVD.ipynb        # 아이템 기반 협업 필터링, 사용자 기반 협업 필터링, 잠재 요인 기반 추천
-│   └── NeuMF.ipynb           # 고객과 식당의 상호작용 정보와 평점만을 고려한 NeuMF모델
-│   └── UCAM.ipynb       # 고객과 레스토랑 상호작용 정보에 추가적인 문맥 정보를 결합한 UCAM모델
+├── Comparison_models/       # 비교 모델
+│   └── AFRAM.ipynb          # 고객 및 레스토랑의 지역적, 전역적 특성을 기반으로 선호도를 예측하는 AFRAM모델
+│   └── IBCF_UBCF_SVD.ipynb  # 아이템 기반 협업 필터링, 사용자 기반 협업 필터링, 잠재 요인 기반 추천
+│   └── NeuMF.ipynb          # 고객과 식당의 상호작용 정보와 평점만을 고려한 NeuMF모델
+│   └── UCAM.ipynb           # 고객과 레스토랑 상호작용 정보에 추가적인 문맥 정보를 결합한 UCAM모델
 ├── Image                    # READ.ME 이미지
 ├── AS-Rec.ipynb             # 메인 모델
 ├── document.ipynb           # 프로젝트 문서 및 설명
 ├── preprocessing.ipynb      # 데이터 전처리
-├── README.md                # 프로젝트 설명 파일
+└── README.md                # 프로젝트 설명 파일
 ```
 
 ## 환경 (Environment)
