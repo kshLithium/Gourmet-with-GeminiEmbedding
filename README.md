@@ -23,7 +23,8 @@
 ![alt text](Image/image.png)
 
 본 프로젝트에서는 Yelp Open Dataset을 기반으로 사용자 맞춤형 맛집 추천 시스템을 구축하였습니다.([Yelp Open Dataset](https://business.yelp.com/data/resources/open-dataset/))
-
+감성벡터 파일([review_business_5up_5aspect_3sentiment_vectorized_clean.json](https://drive.google.com/file/d/1Ohn2lja08GJXLNFl-gD8QFiAiG3V13Y5/view?usp=sharing))
+텍스트 파일([review_business_5up_with_text.json](https://drive.google.com/file/d/1wFgSLP564VK5XRCUr1n_8UTGW1vdhfPL/view?usp=sharing))
 ## 데이터 전처리(Data Preprocessing)
 - **지역 데이터 집중** : 미국 내 음식점 수가 가장 많은 주 펜실베니아(PA)의 필라델피아 시로 데이터 범위 한정
 - **음식점 카테고리 필터링** : Yelp 공식 블로그의 카테고리 리스트를 참조해 음식 및 레스토랑 관련 업종만 추출 ([Yelp Category List](https://blog.yelp.com/businesses/yelp_category_list/))
