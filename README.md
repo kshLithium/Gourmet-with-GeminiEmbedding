@@ -33,6 +33,8 @@
 - **Pandas**: 2.2.2
 - **NumPy**: 1.26.4
 - **Scikit-learn**: 1.5.1
+- **torch**: 2.6.0+cu124
+- **tqdm**: 4.67.1
 
 ##  데이터(Data)
 ![alt text](Image/image.png)
