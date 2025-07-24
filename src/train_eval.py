@@ -9,12 +9,22 @@ import pandas as pd
 from typing import Dict, List, Tuple
 
 
-from utils import mean_absolute_percentage_error
-from models import ASRec
+from .utils import mean_absolute_percentage_error
+from .models import ASRec
 
-def train_model(model: ASRec, train_loader: DataLoader, val_loader: DataLoader,
-                criterion: nn.Module, optimizer: optim.Optimizer,
-                epochs: int, patience: int, min_delta: float, model_path: str, device: torch.device):
+
+def train_model(
+    model: ASRec,
+    train_loader: DataLoader,
+    val_loader: DataLoader,
+    criterion: nn.Module,
+    optimizer: optim.Optimizer,
+    epochs: int,
+    patience: int,
+    min_delta: float,
+    model_path: str,
+    device: torch.device,
+):
     """
     조기 종료(Early Stopping)를 사용하여 AS-Rec 모델을 학습
 
@@ -33,7 +43,7 @@ def train_model(model: ASRec, train_loader: DataLoader, val_loader: DataLoader,
     반환:
         None
     """
-    best_val_rmse = float('inf')
+    best_val_rmse = float("inf")
     epochs_no_improve = 0
 
     print("\n 모델 학습 시작")
@@ -41,12 +51,16 @@ def train_model(model: ASRec, train_loader: DataLoader, val_loader: DataLoader,
         # 학습 단계
         model.train()
         total_train_loss = 0
-        for user_ids, business_ids, sentiment_vectors, stars in train_loader:
-            user_ids, business_ids, sentiment_vectors, stars = \
-                user_ids.to(device), business_ids.to(device), sentiment_vectors.to(device), stars.to(device)
+        for user_ids, business_ids, embeddings, stars in train_loader:
+            user_ids, business_ids, embeddings, stars = (
+                user_ids.to(device),
+                business_ids.to(device),
+                embeddings.to(device),
+                stars.to(device),
+            )
 
             optimizer.zero_grad()
-            predictions = model(user_ids, business_ids, sentiment_vectors)
+            predictions = model(user_ids, business_ids, embeddings)
             loss = criterion(predictions, stars)
             loss.backward()
             optimizer.step()
@@ -57,19 +71,27 @@ def train_model(model: ASRec, train_loader: DataLoader, val_loader: DataLoader,
         val_predictions = []
         val_true_ratings = []
         with torch.no_grad():
-            for user_ids, business_ids, sentiment_vectors, stars in val_loader:
-                user_ids, business_ids, sentiment_vectors, stars = \
-                    user_ids.to(device), business_ids.to(device), sentiment_vectors.to(device), stars.to(device)
+            for user_ids, business_ids, embeddings, stars in val_loader:
+                user_ids, business_ids, embeddings, stars = (
+                    user_ids.to(device),
+                    business_ids.to(device),
+                    embeddings.to(device),
+                    stars.to(device),
+                )
 
-                predictions = model(user_ids, business_ids, sentiment_vectors)
+                predictions = model(user_ids, business_ids, embeddings)
                 val_predictions.extend(predictions.cpu().tolist())
                 val_true_ratings.extend(stars.cpu().tolist())
 
-        current_val_rmse = np.sqrt(mean_squared_error(val_true_ratings, val_predictions))
+        current_val_rmse = np.sqrt(
+            mean_squared_error(val_true_ratings, val_predictions)
+        )
 
-        print(f"에포크 {epoch+1}/{epochs}, "
-              f"학습 손실: {total_train_loss / len(train_loader):.4f}, "
-              f"검증 RMSE: {current_val_rmse:.4f}")
+        print(
+            f"에포크 {epoch+1}/{epochs}, "
+            f"학습 손실: {total_train_loss / len(train_loader):.4f}, "
+            f"검증 RMSE: {current_val_rmse:.4f}"
+        )
 
         # 조기 종료 로직
         if current_val_rmse < best_val_rmse - min_delta:
@@ -84,7 +106,10 @@ def train_model(model: ASRec, train_loader: DataLoader, val_loader: DataLoader,
                 print(f"조기 종료 - {patience} 에포크 동안 검증 RMSE 개선 없음.")
                 break
 
-def evaluate_model(model: ASRec, test_loader: DataLoader, device: torch.device, model_path: str = None) -> Dict[str, float]:
+
+def evaluate_model(
+    model: ASRec, test_loader: DataLoader, device: torch.device, model_path: str = None
+) -> Dict[str, float]:
     """
     학습된 모델을 테스트 세트에서 평가
 
@@ -102,19 +127,24 @@ def evaluate_model(model: ASRec, test_loader: DataLoader, device: torch.device, 
         model.load_state_dict(torch.load(model_path))
         print(f"최적 모델 가중치를 '{model_path}'에서 로드했습니다.")
     elif model_path:
-        print(f"최적 최종 모델 가중치 '{model_path}'를 찾을 수 없습니다. 현재 모델 상태로 테스트합니다.")
-
+        print(
+            f"최적 최종 모델 가중치 '{model_path}'를 찾을 수 없습니다. 현재 모델 상태로 테스트합니다."
+        )
 
     model.eval()
     test_predictions = []
     true_ratings = []
 
     with torch.no_grad():
-        for user_ids, business_ids, sentiment_vectors, stars in test_loader:
-            user_ids, business_ids, sentiment_vectors, stars = \
-                user_ids.to(device), business_ids.to(device), sentiment_vectors.to(device), stars.to(device)
+        for user_ids, business_ids, embeddings, stars in test_loader:
+            user_ids, business_ids, embeddings, stars = (
+                user_ids.to(device),
+                business_ids.to(device),
+                embeddings.to(device),
+                stars.to(device),
+            )
 
-            predictions = model(user_ids, business_ids, sentiment_vectors)
+            predictions = model(user_ids, business_ids, embeddings)
             test_predictions.extend(predictions.cpu().tolist())
             true_ratings.extend(stars.cpu().tolist())
 
@@ -123,12 +153,7 @@ def evaluate_model(model: ASRec, test_loader: DataLoader, device: torch.device, 
     mae = mean_absolute_error(true_ratings, test_predictions)
     mape = mean_absolute_percentage_error(true_ratings, test_predictions)
 
-    metrics = {
-        "MSE": mse,
-        "RMSE": rmse,
-        "MAE": mae,
-        "MAPE": mape
-    }
+    metrics = {"MSE": mse, "RMSE": rmse, "MAE": mae, "MAPE": mape}
 
     print(f"평균 제곱 오차 (MSE): {mse:.4f}")
     print(f"평균 제곱근 오차 (RMSE): {rmse:.4f}")
@@ -137,8 +162,15 @@ def evaluate_model(model: ASRec, test_loader: DataLoader, device: torch.device, 
 
     return metrics
 
-def recommend_topk_for_all_users(model: ASRec, df_processed: pd.DataFrame,
-                                 user_encoder, business_encoder, k: int = 5, device: torch.device = 'cpu') -> Dict[str, List[str]]:
+
+def recommend_topk_for_all_users(
+    model: ASRec,
+    df_processed: pd.DataFrame,
+    user_encoder,
+    business_encoder,
+    k: int = 5,
+    device: torch.device = "cpu",
+) -> Dict[str, List[str]]:
     """
     데이터셋의 모든 고유 사용자에 대해 Top-K 비즈니스 추천을 생성
 
@@ -154,13 +186,15 @@ def recommend_topk_for_all_users(model: ASRec, df_processed: pd.DataFrame,
         Dict[str, List[str]]: 키는 원본 user_id이고 값은 추천된 원본 business_id 목록인 딕셔너리
     """
     model.eval()
-    user_ids_unique = df_processed['user_id'].unique()
-    business_ids_unique = df_processed['business_id'].unique()
+    user_ids_unique = df_processed["user_id"].unique()
+    business_ids_unique = df_processed["business_id"].unique()
 
-    # 각 business_id에 대한 평균 sentiment_vector 계산
-    sentiment_dict = df_processed.groupby('business_id')['sentiment_vector'].apply(
-        lambda x: np.mean(x.tolist(), axis=0)
-    ).to_dict()
+    # 각 business_id에 대한 평균 embedding 계산
+    embedding_dict = (
+        df_processed.groupby("business_id")["embedding"]
+        .apply(lambda x: np.mean(x.tolist(), axis=0))
+        .to_dict()
+    )
 
     recommendations = {}
 
@@ -169,20 +203,28 @@ def recommend_topk_for_all_users(model: ASRec, df_processed: pd.DataFrame,
         encoded_user = user_encoder.transform([user_id])[0]
 
         # 현재 사용자가 이미 평점을 매긴 비즈니스
-        rated_biz = df_processed[df_processed['user_id'] == user_id]['business_id'].unique()
+        rated_biz = df_processed[df_processed["user_id"] == user_id][
+            "business_id"
+        ].unique()
         # 사용자가 평점을 매기지 않았고 감성 벡터를 사용할 수 있는 비즈니스
-        unrated_biz = [b for b in business_ids_unique if b not in rated_biz and b in sentiment_dict]
+        unrated_biz = [
+            b for b in business_ids_unique if b not in rated_biz and b in embedding_dict
+        ]
 
         if not unrated_biz:
             recommendations[user_id] = []
             continue
 
         # 예측을 위한 텐서 준비
-        user_tensor = torch.tensor([encoded_user] * len(unrated_biz), dtype=torch.long).to(device)
+        user_tensor = torch.tensor(
+            [encoded_user] * len(unrated_biz), dtype=torch.long
+        ).to(device)
         biz_encoded = business_encoder.transform(unrated_biz)
         biz_tensor = torch.tensor(biz_encoded, dtype=torch.long).to(device)
-        sentiment_list = [sentiment_dict[b] for b in unrated_biz]
-        sentiment_tensor = torch.tensor(np.array(sentiment_list), dtype=torch.float).to(device)
+        sentiment_list = [embedding_dict[b] for b in unrated_biz]
+        sentiment_tensor = torch.tensor(np.array(sentiment_list), dtype=torch.float).to(
+            device
+        )
 
         # 예측 수행
         with torch.no_grad():
@@ -199,4 +241,3 @@ def recommend_topk_for_all_users(model: ASRec, df_processed: pd.DataFrame,
         recommendations[user_id] = topk_business_ids
 
     return recommendations
-
